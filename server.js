@@ -9,13 +9,13 @@ app.use(express.json());
 
 app.post('/api/query', async (req, res) => {
     try {
-        const openaiApiKey = "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"
+        const openaiApiKey = require('dotenv').config().parsed.OPENAI_API_KEY;
 
         if (!openaiApiKey) {
             return res.status(500).json({ error: "API key is missing" });
         }
 
-        //console.log("OpenAI API Key: ", openaiApiKey); // Log to check if the key is being loaded
+        console.log("OpenAI API Key: ", openaiApiKey); // Log to check if the key is being loaded
 
         const response = await axios.post('https://api.openai.com/v1/chat/completions', {
             model: "gpt-4", // Correct model name
